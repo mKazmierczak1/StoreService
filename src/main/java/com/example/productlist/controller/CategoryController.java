@@ -14,7 +14,7 @@ public class CategoryController {
   private final CategoryService categoryService;
   private long latestRequestedId;
 
-  @GetMapping("/category")
+  @GetMapping("/category/")
   public String home(Model model) {
     List<Category> categoryList = categoryService.getAllCategories();
     model.addAttribute("categoryList", categoryList);

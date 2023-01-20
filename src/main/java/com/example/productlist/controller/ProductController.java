@@ -14,7 +14,7 @@ public class ProductController {
   private final ProductService productService;
   private long latestRequestedId;
 
-  @GetMapping("/product")
+  @GetMapping("/product/")
   public String home(Model model) {
     List<Product> productList = productService.getAllProducts();
     model.addAttribute("productList", productList);
