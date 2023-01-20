@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_store_layout">
+
+<title layout:fragment="title">User cart</title>
+
+<div layout:fragment="content">
+  <div class="content">
+            <table class="display table table-bordered" style="width:800px">
+              <thead class="text-center">
+              <tr>
+                <th class="text-center">Product name</th>
+                <th class="text-center">Weight [kg]</th>
+                <th class="text-center">Price [pln]</th>
+                <th class="text-center">Number of items</th>
+                <th class="text-center" colspan="3">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="product : ${productList}">
+                <td class="text-center" th:text= "${product.getProduct().getName()}"></td>
+                <td class="text-center" th:text= "${product.getProduct().getWeight()}"></td>
+                <td class="text-center" th:text= "${product.getProduct().getPrice()}"></td>
+                <td class="text-center" th:text="${product.getAmount()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/cart/{productId}/increase(productId=${product.getProduct().getId()})}">+</a></td>
+                <td><a class="btn btn-danger" th:href="@{/cart/{productId}/decrease(productId=${product.getProduct().getId()})}">-</a></td>
+                <td><a class="btn btn-danger" th:href="@{/cart/{productId}/remove(productId=${product.getProduct().getId()})}">remove</a></td>
+              </tr>
+              </tbody>
+            </table>
+  </div>
+</div>
+</html>
