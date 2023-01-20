@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_product_layout">
+
+<title layout:fragment="title">Add product form</title>
+
+<div layout:fragment="content">
+<h1>Add a new product</h1>
+<form action="#" th:action="@{/product/add}" th:object="${product}" method="post">
+  <p>Product name: <input type="text" th:field="*{name}" /></p>
+  <p>Weight: <input type="number" step="0.01" th:field="*{weight}" /></p>
+  <p>Price: <input type="number" step="0.01" th:field="*{price}" /></p>
+  <p>Index: <input type="number" th:field="*{index}" /></p>
+  <div>
+    <label th:for="${product.category.getId()}">Select a category:</label>
+    <select th:field="${product.category}" style="width:30%">
+      <option th:each="category : ${categoryOptions}"
+              th:text="${category.name}"
+              th:value="${category.id}"
+              th:selected="${category.id==product.category.getId()}">
+      </option>
+    </select>
+  </div>
+  <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
+</form>
+</div>
+</html>

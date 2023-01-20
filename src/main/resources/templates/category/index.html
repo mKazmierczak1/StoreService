@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_category_layout">
+
+<title layout:fragment="title">Categories list</title>
+
+<div layout:fragment="content">
+  <div class="content">
+            <table class="display table table-bordered" style="width:800px">
+              <thead class="text-center">
+              <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Category name</th>
+                <th class="text-center">Code</th>
+                <th class="text-center" colspan="2">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="category : ${categoryList}">
+                <td class="text-center"th:text= "${category.getId()}"></td>
+                <td class="text-center"th:text= "${category.getName()}"></td>
+                <td class="text-center" th:text= "${category.getCode()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/category/{categoryId}/edit(categoryId=${category.getId()})}">edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{/category/remove(id=${category.id})}">remove</a></td>
+              </tr>
+              </tbody>
+            </table>
+  </div>
+</div>
+</html>

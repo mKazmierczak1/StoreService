@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_product_layout">
+
+<title layout:fragment="title">Products list</title>
+
+<div layout:fragment="content">
+  <div class="content">
+            <table class="display table table-bordered" style="width:800px">
+              <thead class="text-center">
+              <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Product name</th>
+                <th class="text-center">Weight [kg]</th>
+                <th class="text-center">Price [pln]</th>
+                <th class="text-center">Category</th>
+                <th class="text-center" colspan="3">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="product : ${productList}">
+                <td class="text-center"th:text= "${product.getId()}"></td>
+                <td class="text-center"th:text= "${product.getName()}"></td>
+                <td class="text-center" th:text= "${product.getWeight()}"></td>
+                <td class="text-center" th:text= "${product.getPrice()}"></td>
+                <td class="text-center" th:text= "${product.getCategory().getName()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/product/details(id=${product.id})}">details</a></td>
+                <td><a class="btn btn-primary" th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>
+              </tr>
+              </tbody>
+            </table>
+  </div>
+</div>
+</html>
