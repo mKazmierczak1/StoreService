@@ -1,10 +1,8 @@
 package com.example.productlist.controller;
 
-import com.example.productlist.model.Product;
 import com.example.productlist.service.ProductService;
 import com.example.productlist.service.StoreService;
 import java.util.Arrays;
-import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +20,8 @@ public class StoreController {
 
   @GetMapping("/store/")
   public String home(HttpServletResponse response, Model model) {
-    List<Product> productList = productService.getAllProducts();
+    var productList = productService.getAllProducts();
+
     model.addAttribute("productList", productList);
 
     return "store/index";
@@ -51,9 +50,11 @@ public class StoreController {
             .map(Cookie::getValue)
             .map(Long::parseLong)
             .toList();
-    var items = storeService.getProductById(ids);
+    var items = storeService.getProductsById(ids);
+    var payment = storeService.getPayment();
 
     model.addAttribute("productList", items);
+    model.addAttribute("payment", payment);
 
     return "store/cart";
   }

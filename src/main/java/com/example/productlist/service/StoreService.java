@@ -16,7 +16,7 @@ public class StoreService {
   private final ProductRepository productRepository;
   private List<CartItem> items;
 
-  public List<CartItem> getProductById(Collection<Long> ids) {
+  public List<CartItem> getProductsById(Collection<Long> ids) {
     Stream<Pair<Long, Integer>> amountsWithIds =
         items == null
             ? Stream.empty()
@@ -29,9 +29,17 @@ public class StoreService {
     return items;
   }
 
+  public float getPayment() {
+    if (items == null || items.isEmpty()) {
+      return 0f;
+    }
+
+    return (float)
+        items.stream().mapToDouble(item -> item.getProduct().getPrice() * item.getAmount()).sum();
+  }
+
   public void increaseAmountForId(long id) {
     findById(id).ifPresent(CartItem::increaseAmount);
-    findById(id).ifPresent(System.out::println);
   }
 
   public void decreaseAmountForId(long id) {
